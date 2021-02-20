@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -9,9 +11,13 @@ def home():
 
 @app.route('/populer')
 def populer():
+    res = requests.get('https://id.carousell.com/categories/photography-6/')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    posts = soup.find_all(attrs={'class': 'D_hc M_jV D_gZ D_fw'})
 
-    titles = ['aku','dua','tigsa', 'emprat']
-    return render_template('index.html', yoyos=titles)
+    return render_template('index.html', posts=posts)
+
+
 
 
 

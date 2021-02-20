@@ -64,21 +64,26 @@
       <div class="col-lg-9">
 
         <div class="row">
-          {% for yoyo in yoyos %}
+          {% for post in posts %}
 
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="https://id.carousell.com{{post.find_all('a')[1]['href']|safe}}">
+                <img class="card-img-top" src="{{post.find_all('img')[0]['src']}}" alt="">
+              </a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Item One</a>
+                  <a href="https://id.carousell.com{{post.find_all('a')[1]['href']|safe}}">
+                    {{ post.find_all('p')[2].text }}
+                  </a>
                 </h4>
-                <h5>{{ yoyo }}</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                <h5>{{ post.find_all('p')[3].text }}</h5>
+
               </div>
               <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+
+                <p class="card-text">{{post.find_all('p')[4].text}}</p>
               </div>
             </div>
           </div>
